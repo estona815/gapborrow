@@ -1,0 +1,396 @@
+{
+  "status": "PRE_EVENT_SYNTHETIC_RESEARCH_NOT_FIELD_VALIDATION",
+  "created_date": "2026-10-20",
+  "results": [
+    {
+      "case": "known-future-pickup-gap",
+      "synthetic": true,
+      "note": "Illustrative head-of-line blocking; not a claim about any university's current scheduler.",
+      "horizon": 8,
+      "turnaround": 0,
+      "requests": [
+        {
+          "id": "A",
+          "release": 6,
+          "deadline": 8,
+          "duration": 2
+        },
+        {
+          "id": "B",
+          "release": 0,
+          "deadline": 2,
+          "duration": 2
+        },
+        {
+          "id": "C",
+          "release": 2,
+          "deadline": 4,
+          "duration": 2
+        },
+        {
+          "id": "D",
+          "release": 4,
+          "deadline": 6,
+          "duration": 2
+        }
+      ],
+      "strategies": {
+        "strict": {
+          "served": 1,
+          "rejected": [
+            "B",
+            "C",
+            "D"
+          ],
+          "bookings": [
+            {
+              "id": "A",
+              "start": 6,
+              "end": 8
+            }
+          ],
+          "occupied_slots": 2
+        },
+        "gap": {
+          "served": 4,
+          "rejected": [],
+          "bookings": [
+            {
+              "id": "A",
+              "start": 6,
+              "end": 8
+            },
+            {
+              "id": "B",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "id": "C",
+              "start": 2,
+              "end": 4
+            },
+            {
+              "id": "D",
+              "start": 4,
+              "end": 6
+            }
+          ],
+          "occupied_slots": 8
+        },
+        "deadline": {
+          "served": 4,
+          "rejected": [],
+          "bookings": [
+            {
+              "id": "B",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "id": "C",
+              "start": 2,
+              "end": 4
+            },
+            {
+              "id": "D",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "id": "A",
+              "start": 6,
+              "end": 8
+            }
+          ],
+          "occupied_slots": 8
+        }
+      },
+      "unconstrained_cardinality_upper_bound": 4
+    },
+    {
+      "case": "no-gap-no-gain",
+      "synthetic": true,
+      "note": "Contiguous equally sized loans: gap insertion provides no benefit.",
+      "horizon": 4,
+      "turnaround": 0,
+      "requests": [
+        {
+          "id": "A",
+          "release": 0,
+          "deadline": 2,
+          "duration": 2
+        },
+        {
+          "id": "B",
+          "release": 0,
+          "deadline": 4,
+          "duration": 2
+        },
+        {
+          "id": "C",
+          "release": 0,
+          "deadline": 4,
+          "duration": 2
+        }
+      ],
+      "strategies": {
+        "strict": {
+          "served": 2,
+          "rejected": [
+            "C"
+          ],
+          "bookings": [
+            {
+              "id": "A",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "id": "B",
+              "start": 2,
+              "end": 4
+            }
+          ],
+          "occupied_slots": 4
+        },
+        "gap": {
+          "served": 2,
+          "rejected": [
+            "C"
+          ],
+          "bookings": [
+            {
+              "id": "A",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "id": "B",
+              "start": 2,
+              "end": 4
+            }
+          ],
+          "occupied_slots": 4
+        },
+        "deadline": {
+          "served": 2,
+          "rejected": [
+            "C"
+          ],
+          "bookings": [
+            {
+              "id": "A",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "id": "B",
+              "start": 2,
+              "end": 4
+            }
+          ],
+          "occupied_slots": 4
+        }
+      },
+      "unconstrained_cardinality_upper_bound": 2
+    },
+    {
+      "case": "priority-versus-throughput",
+      "synthetic": true,
+      "note": "Protecting an early long booking serves fewer people than cardinality maximization; disclose this tradeoff.",
+      "horizon": 6,
+      "turnaround": 0,
+      "requests": [
+        {
+          "id": "A",
+          "release": 0,
+          "deadline": 6,
+          "duration": 6
+        },
+        {
+          "id": "B",
+          "release": 0,
+          "deadline": 2,
+          "duration": 2
+        },
+        {
+          "id": "C",
+          "release": 2,
+          "deadline": 4,
+          "duration": 2
+        },
+        {
+          "id": "D",
+          "release": 4,
+          "deadline": 6,
+          "duration": 2
+        }
+      ],
+      "strategies": {
+        "strict": {
+          "served": 1,
+          "rejected": [
+            "B",
+            "C",
+            "D"
+          ],
+          "bookings": [
+            {
+              "id": "A",
+              "start": 0,
+              "end": 6
+            }
+          ],
+          "occupied_slots": 6
+        },
+        "gap": {
+          "served": 1,
+          "rejected": [
+            "B",
+            "C",
+            "D"
+          ],
+          "bookings": [
+            {
+              "id": "A",
+              "start": 0,
+              "end": 6
+            }
+          ],
+          "occupied_slots": 6
+        },
+        "deadline": {
+          "served": 3,
+          "rejected": [
+            "A"
+          ],
+          "bookings": [
+            {
+              "id": "B",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "id": "C",
+              "start": 2,
+              "end": 4
+            },
+            {
+              "id": "D",
+              "start": 4,
+              "end": 6
+            }
+          ],
+          "occupied_slots": 6
+        }
+      },
+      "unconstrained_cardinality_upper_bound": 3
+    },
+    {
+      "case": "turnaround-buffer-must-count",
+      "synthetic": true,
+      "note": "One slot for inspection/reset between borrowers reduces feasible capacity.",
+      "horizon": 8,
+      "turnaround": 1,
+      "requests": [
+        {
+          "id": "A",
+          "release": 6,
+          "deadline": 8,
+          "duration": 2
+        },
+        {
+          "id": "B",
+          "release": 0,
+          "deadline": 2,
+          "duration": 2
+        },
+        {
+          "id": "C",
+          "release": 2,
+          "deadline": 4,
+          "duration": 2
+        },
+        {
+          "id": "D",
+          "release": 3,
+          "deadline": 5,
+          "duration": 2
+        }
+      ],
+      "strategies": {
+        "strict": {
+          "served": 1,
+          "rejected": [
+            "B",
+            "C",
+            "D"
+          ],
+          "bookings": [
+            {
+              "id": "A",
+              "start": 6,
+              "end": 8
+            }
+          ],
+          "occupied_slots": 2
+        },
+        "gap": {
+          "served": 3,
+          "rejected": [
+            "C"
+          ],
+          "bookings": [
+            {
+              "id": "A",
+              "start": 6,
+              "end": 8
+            },
+            {
+              "id": "B",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "id": "D",
+              "start": 3,
+              "end": 5
+            }
+          ],
+          "occupied_slots": 6
+        },
+        "deadline": {
+          "served": 3,
+          "rejected": [
+            "C"
+          ],
+          "bookings": [
+            {
+              "id": "B",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "id": "D",
+              "start": 3,
+              "end": 5
+            },
+            {
+              "id": "A",
+              "start": 6,
+              "end": 8
+            }
+          ],
+          "occupied_slots": 6
+        }
+      },
+      "unconstrained_cardinality_upper_bound": 3
+    }
+  ],
+  "limitations": [
+    "Fixed known windows; one device; integer slots",
+    "No real students, inventory, late returns or staff validation",
+    "No general optimality, fairness or real-impact claim"
+  ]
+}

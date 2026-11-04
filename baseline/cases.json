@@ -1,0 +1,45 @@
+[
+  {
+    "id": "known-future-pickup-gap",
+    "note": "Illustrative head-of-line blocking; not a claim about any university's current scheduler.",
+    "horizon": 8, "turnaround": 0,
+    "requests": [
+      {"id": "A", "release": 6, "deadline": 8, "duration": 2},
+      {"id": "B", "release": 0, "deadline": 2, "duration": 2},
+      {"id": "C", "release": 2, "deadline": 4, "duration": 2},
+      {"id": "D", "release": 4, "deadline": 6, "duration": 2}
+    ]
+  },
+  {
+    "id": "no-gap-no-gain",
+    "note": "Contiguous equally sized loans: gap insertion provides no benefit.",
+    "horizon": 4, "turnaround": 0,
+    "requests": [
+      {"id": "A", "release": 0, "deadline": 2, "duration": 2},
+      {"id": "B", "release": 0, "deadline": 4, "duration": 2},
+      {"id": "C", "release": 0, "deadline": 4, "duration": 2}
+    ]
+  },
+  {
+    "id": "priority-versus-throughput",
+    "note": "Protecting an early long booking serves fewer people than cardinality maximization; disclose this tradeoff.",
+    "horizon": 6, "turnaround": 0,
+    "requests": [
+      {"id": "A", "release": 0, "deadline": 6, "duration": 6},
+      {"id": "B", "release": 0, "deadline": 2, "duration": 2},
+      {"id": "C", "release": 2, "deadline": 4, "duration": 2},
+      {"id": "D", "release": 4, "deadline": 6, "duration": 2}
+    ]
+  },
+  {
+    "id": "turnaround-buffer-must-count",
+    "note": "One slot for inspection/reset between borrowers reduces feasible capacity.",
+    "horizon": 8, "turnaround": 1,
+    "requests": [
+      {"id": "A", "release": 6, "deadline": 8, "duration": 2},
+      {"id": "B", "release": 0, "deadline": 2, "duration": 2},
+      {"id": "C", "release": 2, "deadline": 4, "duration": 2},
+      {"id": "D", "release": 3, "deadline": 5, "duration": 2}
+    ]
+  }
+]

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GapBorrow · 대여 배정 검토</title>
+  <link rel="stylesheet" href="/style.css"><script defer src="/app.js"></script>
+</head>
+<body>
+<div class="app">
+  <header><div class="wordmark">GapBorrow</div><span>사전 연구 · 합성 자료</span></header>
+  <main>
+    <h1>대여 배정 검토</h1>
+    <p class="intro">공용 장비 한 대의 신청과 빈 시간을 비교합니다.</p>
+    <div class="workspace">
+      <section class="inputs" aria-labelledby="conditions-title">
+        <h2 id="conditions-title">대여 조건</h2>
+        <form id="review-form">
+          <div class="metrics">
+            <label for="horizon">운영 시간<span class="numeric"><input id="horizon" type="number" value="8" min="1" max="48" required><span>칸</span></span></label>
+            <label for="inspection">점검 시간<span class="numeric"><input id="inspection" type="number" value="1" min="0" max="48" required><span>칸</span></span></label>
+            <label for="lateness">반납 여유<span class="numeric"><input id="lateness" type="number" value="0" min="0" max="48" required><span>칸</span></span></label>
+          </div>
+          <div class="list-heading"><h2>신청 목록</h2>
+            <select id="example" aria-label="예시 불러오기">
+              <option value="" selected disabled>예시 불러오기</option>
+              <option value="0">늦은 픽업 전 빈 시간</option>
+              <option value="1">빈 시간이 없는 경우</option>
+              <option value="2">긴 선행 예약</option>
+              <option value="3">점검 시간 포함</option>
+            </select>
+          </div>
+          <table class="request-table"><thead><tr><th>신청</th><th>시작</th><th>마감</th><th>길이</th><th><span class="sr-only">삭제</span></th></tr></thead><tbody id="requests"></tbody></table>
+          <button class="secondary add" type="button" id="add">+ 신청 추가</button>
+          <div id="error" role="alert" hidden></div>
+          <button class="primary calculate" type="submit">배정 계산</button>
+        </form>
+      </section>
+      <section class="results" aria-labelledby="comparison-title">
+        <h2 id="comparison-title">배정 비교</h2>
+        <div id="schedules" aria-label="배정 방식별 비교"></div>
+        <div class="reasons"><h2>배정하지 못한 이유</h2><div id="reasons" aria-live="polite"></div>
+          <p class="hint">입력 조건이 바뀌면 배정도 다시 계산됩니다.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer><span>실제 예약을 변경하지 않는 연구용 계산입니다.</span><button class="secondary" id="download" type="button" disabled>검토 결과 저장</button></footer>
+</div>
+</body>
+</html>
