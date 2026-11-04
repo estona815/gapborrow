@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GapBorrow · Equipment scheduling review</title>
+  <link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<div class="app">
+  <header><div class="wordmark">GapBorrow</div><span>Competition prototype · Synthetic data</span></header>
+  <main>
+    <h1>Equipment scheduling review</h1>
+    <p class="intro">Compare booking policies and find possible alternatives for rejected requests.</p>
+    <div class="workspace">
+      <section class="inputs" aria-labelledby="conditions-title">
+        <h2 id="conditions-title">Booking conditions</h2>
+        <form id="review-form">
+          <div class="metrics">
+            <label for="horizon">Operating horizon<span class="numeric"><input id="horizon" type="number" value="8" min="1" max="48" required><span> slots</span></span></label>
+            <label for="inspection">Inspection<span class="numeric"><input id="inspection" type="number" value="1" min="0" max="48" required><span> slots</span></span></label>
+            <label for="lateness">Return allowance<span class="numeric"><input id="lateness" type="number" value="0" min="0" max="48" required><span> slots</span></span></label>
+          </div>
+          <div class="list-heading"><h2>Requests</h2>
+            <select id="example" aria-label="Load an example">
+              <option value="" selected disabled>Load an example</option>
+              <option value="0">Gap before a late pickup</option>
+              <option value="1">Fully booked horizon</option>
+              <option value="2">Long first booking</option>
+              <option value="3">Inspection buffer</option>
+            </select>
+          </div>
+          <table class="request-table"><thead><tr><th>Request</th><th>Start</th><th>Deadline</th><th>Duration</th><th><span class="sr-only">Remove</span></th></tr></thead><tbody id="requests"></tbody></table>
+          <button class="secondary add" type="button" id="add">+ Add request</button>
+          <div id="error" role="alert" hidden></div>
+          <button class="primary calculate" type="submit">Compare policies</button>
+        </form>
+      </section>
+      <section class="results" aria-labelledby="comparison-title">
+        <h2 id="comparison-title">Policy comparison</h2>
+        <div id="schedules" aria-label="Compare booking policies"></div>
+        <div class="reasons"><h2>Rejected requests and alternatives</h2><div id="reasons" aria-live="polite"></div>
+          <p class="hint">Recalculate after changing the inputs. Each alternative is for individual review.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer><span>Synthetic planning exercise. No reservations are made.</span><button class="secondary" id="download" type="button" disabled>Download report</button></footer>
+</div>
+</body>
+</html>
