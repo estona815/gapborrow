@@ -16,6 +16,10 @@ Run `python3 -m unittest -v` to check the baseline schedule, HTTP routes, reject
 
 The `docs/` directory contains a static English interface and a browser port of the scheduling engine. Try the [GitHub Pages demo](https://estona815.github.io/gapborrow/) or serve the directory locally with `python3 -m http.server 8878 --bind 127.0.0.1 --directory docs`. Calculations stay in the browser.
 
-Select **Fully booked horizon**, then increase **Operating horizon** from 4 to 12 and compare the policies again. The protected-gap policy keeps the accepted bookings and proposes slots 4–6 for the rejected request, requiring a two-slot deadline extension.
+Watch the [75-second captioned walkthrough](https://github.com/estona815/gapborrow/releases/tag/stemergent-2026-demo), or try this example in the live demo:
+
+1. Select **Fully booked horizon**. At 4 slots, the protected-gap policy has no alternative for the rejected request.
+2. Increase **Operating horizon** to 12 and select **Compare policies**. The accepted bookings remain in place. The rejected request gets slots 4–6 as a possible alternative, requiring a two-slot deadline extension.
+3. Select **Download report** to inspect the exact inputs, schedules, and alternative in JSON. The alternative is for individual review and does not reserve a slot.
 
 Run `node --test browser-parity.test.mjs` with Python 3 available. This compares all three strategies, rejection reason codes, blocking requests and alternative slots against the Python implementation over 260 synthetic inputs.
