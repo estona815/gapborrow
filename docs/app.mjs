@@ -9,6 +9,7 @@ import { review } from './engine.mjs';
   const download = document.getElementById('download');
   const submit = form.querySelector('[type="submit"]');
   const fields = ['horizon', 'inspection', 'lateness'];
+  const examplePicker = document.getElementById('example');
   const names = {strict:'Strict queue', gap:'Protected gaps', deadline:'Earliest deadline'};
   let requests = [], examples = [], report = null, revision = 0, dirty = true;
   const svgNS = 'http://www.w3.org/2000/svg';
@@ -145,6 +146,7 @@ import { review } from './engine.mjs';
   function loadExample(index) {
     const example=examples[index];
     if(!example)return;
+    examplePicker.value = String(index);
     requests=example.requests.map(r=>({...r}));
     document.getElementById('horizon').value=example.horizon;
     document.getElementById('inspection').value=example.turnaround;
@@ -154,7 +156,7 @@ import { review } from './engine.mjs';
 
   fields.forEach(id=>document.getElementById(id).addEventListener('input',markDirty));
   form.addEventListener('submit',event=>{event.preventDefault();calculate();});
-  document.getElementById('example').addEventListener('change',event=>loadExample(Number(event.target.value)));
+  examplePicker.addEventListener('change',event=>loadExample(Number(event.target.value)));
   document.getElementById('add').addEventListener('click',()=>{
     let next=0,id;
     do{id=next<26?String.fromCharCode(65+next):'R'+(next+1);next++;}while(requests.some(r=>r.id===id));
@@ -171,6 +173,12 @@ import { review } from './engine.mjs';
   });
   new ResizeObserver(drawTimelines).observe(schedules);
   fetch('./cases.json').then(r=>{if(!r.ok)throw new Error('Could not load the synthetic examples.');return r.json();})
-    .then(data=>{examples=data;loadExample(3);})
-    .catch(exc=>{error.hidden=false;error.textContent=exc.message;});
+    .then(data=>{
+      examples=data;
+      for (const id of fields) document.getElementById(id).disabled=false;
+      loadExample(3);
+      examplePicker.disabled=false;
+    })
+    .catch(exc=>{error.hidden=false;error.textContent=exc.message;})
+    .finally(()=>form.setAttribute('aria-busy','false'));
 })();

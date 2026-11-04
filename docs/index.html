@@ -14,14 +14,14 @@
     <div class="workspace">
       <section class="inputs" aria-labelledby="conditions-title">
         <h2 id="conditions-title">Booking conditions</h2>
-        <form id="review-form">
+        <form id="review-form" aria-busy="true">
           <div class="metrics">
-            <label for="horizon">Operating horizon<span class="numeric"><input id="horizon" type="number" value="8" min="1" max="48" required><span> slots</span></span></label>
-            <label for="inspection">Inspection<span class="numeric"><input id="inspection" type="number" value="1" min="0" max="48" required><span> slots</span></span></label>
-            <label for="lateness">Return allowance<span class="numeric"><input id="lateness" type="number" value="0" min="0" max="48" required><span> slots</span></span></label>
+            <label for="horizon">Operating horizon<span class="numeric"><input id="horizon" disabled type="number" value="8" min="1" max="48" required><span> slots</span></span></label>
+            <label for="inspection">Inspection<span class="numeric"><input id="inspection" disabled type="number" value="1" min="0" max="48" required><span> slots</span></span></label>
+            <label for="lateness">Return allowance<span class="numeric"><input id="lateness" disabled type="number" value="0" min="0" max="48" required><span> slots</span></span></label>
           </div>
           <div class="list-heading"><h2>Requests</h2>
-            <select id="example" aria-label="Load an example">
+            <select id="example" disabled aria-label="Load an example">
               <option value="" selected disabled>Load an example</option>
               <option value="0">Gap before a late pickup</option>
               <option value="1">Fully booked horizon</option>
@@ -30,9 +30,9 @@
             </select>
           </div>
           <table class="request-table"><thead><tr><th>Request</th><th>Start</th><th>Deadline</th><th>Duration</th><th><span class="sr-only">Remove</span></th></tr></thead><tbody id="requests"></tbody></table>
-          <button class="secondary add" type="button" id="add">+ Add request</button>
+          <button class="secondary add" type="button" id="add" disabled>+ Add request</button>
           <div id="error" role="alert" hidden></div>
-          <button class="primary calculate" type="submit">Compare policies</button>
+          <button class="primary calculate" disabled type="submit">Compare policies</button>
         </form>
       </section>
       <section class="results" aria-labelledby="comparison-title">
