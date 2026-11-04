@@ -50,6 +50,9 @@ import { review } from './engine.mjs';
       remove.setAttribute('aria-label', request.id+' Remove');
       remove.addEventListener('click', () => {
         requests.splice(index,1); renderRequests(); markDirty();
+        const remainingRow = requestBody.rows[Math.min(index, requests.length - 1)];
+        const focusTarget = remainingRow?.querySelector('button') ?? document.getElementById('add');
+        focusTarget.focus();
       });
       td.appendChild(remove); tr.appendChild(td); requestBody.appendChild(tr);
     });
@@ -163,6 +166,7 @@ import { review } from './engine.mjs';
     const horizon=Number(document.getElementById('horizon').value)||8;
     requests.push({id,release:0,deadline:horizon,duration:1});
     renderRequests(); markDirty();
+    requestBody.rows[requests.length - 1].querySelector('input').focus();
   });
   download.addEventListener('click',()=>{
     if(!report||dirty)return;
